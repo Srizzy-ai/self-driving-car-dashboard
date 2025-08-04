@@ -76,7 +76,7 @@ export default {
         this.loading = true
         this.error = null
         
-        const response = await axios.get('http://localhost:3000/api/vehicles')
+        const response = await axios.get('https://self-driving-car-dashboard.onrender.com/api/vehicles')
         this.cars = response.data.data
         this.lastUpdateTime = new Date().toLocaleTimeString()
         
