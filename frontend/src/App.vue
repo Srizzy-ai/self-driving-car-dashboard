@@ -103,10 +103,16 @@ export default {
     updateMapMarkers() {
       if (!this.map) return
       
+      // Clear existing markers
       Object.values(this.markers).forEach(marker => {
         this.map.removeLayer(marker);
       });
       this.markers = {};
+      
+      // Refresh map size (this fixes the disappearing issue)
+      this.$nextTick(() => {
+        this.map.invalidateSize();
+      });
       
       this.cars.forEach(car => {
         let markerColor = '#808080'
