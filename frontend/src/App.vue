@@ -14,7 +14,8 @@
       
       <div class="section">
         <h2>🗺️ Live Car Locations</h2>
-        <div id="map" style="height: 400px; width: 100%; border: 2px solid #ddd; border-radius: 8px;"></div>
+        <!-- Key fix: Use v-once to prevent re-rendering -->
+        <div v-once id="map" style="height: 400px; width: 100%; border: 2px solid #ddd; border-radius: 8px;"></div>
       </div>
       
       <div class="section">
@@ -67,20 +68,29 @@ export default {
   },
   async mounted() {
     await this.fetchCars()
-    this.initMap()
+    // Delay map initialization to ensure DOM is ready
+    setTimeout(() => {
+      this.initMap()
+    }, 1000)
     setInterval(this.fetchCars, 3000)
   },
   methods: {
     async fetchCars() {
       try {
-        this.loading = true
+        // Don't show loading after first load
+        if (!this.map) {
+          this.loading = true
+        }
         this.error = null
         
         const response = await axios.get('https://self-driving-car-dashboard.onrender.com/api/vehicles')
         this.cars = response.data.data
         this.lastUpdateTime = new Date().toLocaleTimeString()
         
-        this.updateMapMarkers()
+        // Only update markers, never touch the map container
+        if (this.map) {
+          this.updateMarkersOnly()
+        }
         
       } catch (error) {
         this.error = 'Failed to fetch car data. Make sure backend is running.'
@@ -91,16 +101,19 @@ export default {
     },
     
     initMap() {
+      const mapContainer = document.getElementById('map');
+      if (!mapContainer || this.map) return;
+      
       this.map = L.map('map').setView([37.7749, -122.4194], 13)
       
       L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: '© OpenStreetMap contributors'
       }).addTo(this.map)
       
-      this.updateMapMarkers()
+      this.updateMarkersOnly()
     },
     
-    updateMapMarkers() {
+    updateMarkersOnly() {
       if (!this.map) return
       
       // Clear existing markers
@@ -109,11 +122,7 @@ export default {
       });
       this.markers = {};
       
-      // Refresh map size (this fixes the disappearing issue)
-      this.$nextTick(() => {
-        this.map.invalidateSize();
-      });
-      
+      // Add new markers
       this.cars.forEach(car => {
         let markerColor = '#808080'
         if (car.status === 'driving') markerColor = '#4caf50'
