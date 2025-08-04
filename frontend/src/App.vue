@@ -149,138 +149,142 @@ export default {
 <style>
 @import 'leaflet/dist/leaflet.css';
 
-body {
+* {
   margin: 0;
   padding: 0;
-  font-family: Arial, sans-serif;
-  background-color: #f5f5f5;
-  color: #000000;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background-color: #000000;
+  color: #ffffff;
+  line-height: 1.6;
 }
 
 #app {
-  padding: 20px;
   max-width: 1200px;
   margin: 0 auto;
+  padding: 20px;
 }
 
 h1 {
   text-align: center;
-  margin-bottom: 30px;
-  font-size: 2.5em;
-  color: #000000;
+  margin-bottom: 40px;
+  font-size: 2rem;
+  font-weight: 600;
+  color: #ffffff;
 }
 
 h2 {
-  margin-bottom: 15px;
-  font-size: 1.5em;
-  color: #000000;
+  margin-bottom: 20px;
+  font-size: 1.25rem;
+  font-weight: 500;
+  color: #ffffff;
 }
 
 .loading, .error {
   text-align: center;
-  font-size: 1.2em;
   padding: 20px;
-  border-radius: 8px;
   margin: 20px 0;
-  color: #000000;
+  border-radius: 4px;
+  font-weight: 500;
 }
 
 .loading {
-  background-color: #e3f2fd;
-  border: 2px solid #2196f3;
+  background-color: #1a1a1a;
+  border: 1px solid #333333;
+  color: #cccccc;
 }
 
 .error {
-  background-color: #ffebee;
-  border: 2px solid #f44336;
+  background-color: #2d1b1b;
+  border: 1px solid #5a3a3a;
+  color: #ff6b6b;
 }
 
 .section {
-  background: white;
-  padding: 20px;
-  margin-bottom: 30px;
-  border-radius: 12px;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  background-color: #111111;
+  border: 1px solid #333333;
+  border-radius: 4px;
+  padding: 24px;
+  margin-bottom: 24px;
 }
 
 .car-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 20px;
+  gap: 16px;
 }
 
 .car-card {
-  background: #ffffff;
-  border: 2px solid #ddd;
-  border-radius: 8px;
-  padding: 15px;
-  border-left: 6px solid #ccc;
+  background-color: #1a1a1a;
+  border: 1px solid #333333;
+  border-radius: 4px;
+  padding: 16px;
+  border-left: 4px solid #666666;
 }
 
 .car-card.driving {
-  border-left-color: #4caf50;
-  background-color: #f1f8e9;
+  border-left-color: #4ade80;
 }
 
 .car-card.charging {
-  border-left-color: #2196f3;
-  background-color: #e3f2fd;
+  border-left-color: #60a5fa;
 }
 
 .car-card.idle {
-  border-left-color: #ff9800;
-  background-color: #fff3e0;
+  border-left-color: #fbbf24;
 }
 
 .car-card h3 {
-  margin: 0 0 10px 0;
-  font-size: 1.2em;
-  font-weight: bold;
-  color: #000000;
+  margin-bottom: 12px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #ffffff;
 }
 
 .car-card p {
-  margin: 4px 0;
-  font-size: 0.9em;
-  line-height: 1.3;
-  color: #000000;
+  margin-bottom: 6px;
+  font-size: 0.9rem;
+  color: #cccccc;
 }
 
 .car-card strong {
-  font-weight: bold;
-  color: #000000;
+  color: #ffffff;
+  font-weight: 500;
 }
 
 button {
-  background-color: #2196f3;
-  color: #ffffff;
+  background-color: #ffffff;
+  color: #000000;
   border: none;
-  padding: 10px 20px;
-  border-radius: 6px;
+  padding: 8px 16px;
+  border-radius: 4px;
   cursor: pointer;
-  margin-top: 15px;
-  font-size: 1em;
-  font-weight: bold;
+  margin-top: 12px;
+  font-size: 0.9rem;
+  font-weight: 500;
   width: 100%;
+  transition: background-color 0.2s;
 }
 
 button:hover {
-  background-color: #1976d2;
+  background-color: #e5e5e5;
 }
 
 .update-info {
   text-align: center;
-  margin-top: 20px;
-  padding: 15px;
-  background-color: #ffffff;
-  border-radius: 8px;
-  border: 1px solid #ddd;
+  margin-top: 24px;
+  padding: 12px;
+  background-color: #111111;
+  border: 1px solid #333333;
+  border-radius: 4px;
 }
 
 .update-info p {
-  font-size: 1em;
+  font-size: 0.9rem;
+  color: #cccccc;
   margin: 0;
-  font-weight: bold;
-  color: #000000;
 }
 </style>
